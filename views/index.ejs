@@ -1,0 +1,71 @@
+<%- include("partials/header.ejs") %>
+
+<body>
+  <%- include("partials/navbar.ejs") %>
+  <%- include("partials/logoTitle.ejs") %>
+
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                  <% if (games.length > 0) { %>
+                    <% for (let game of games) { %>
+                    <div class="col-xs-12 col-sm-4">
+                      <div class="card">
+                        <a href="/edit/<%=game.id%>" class="img-card">
+                          <img src="<%= game.image %>" />
+                        </a>
+                        <div class="card-content">
+                          <h4 class="card-title"> <%= game.title %> </h4>
+                          <p> <%= game.description %> </p>
+                        </div>
+
+                        <p>
+                          <% 
+                            const filled = "bi bi-star-fill";
+                            const filledPath = "M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z";
+                            const empty = "bi bi-star";
+                            const emptyPath = "M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.56.56 0 0 0-.163-.505L1.71 6.745l4.052-.576a.53.53 0 0 0 .393-.288L8 2.223l1.847 3.658a.53.53 0 0 0 .393.288l4.052.575-2.906 2.77a.56.56 0 0 0-.163.506l.694 3.957-3.686-1.894a.5.5 0 0 0-.461 0z";
+
+                            
+                            // Ensure rating is an integer
+                            const rating = parseInt(game.rating);
+                            
+                            // Loop through 5 stars and dynamically assign the correct class
+                            for (let i = 1; i <= 5; i++) {
+                              let starClass;
+                              let path;
+
+                              if (i <= rating) {
+                                starClass = filled;
+                                path = filledPath;
+                              } else {
+                                starClass = empty;
+                                path = emptyPath;
+                              }
+                          %>
+                            <svg xmlns="http://www.w3.org/2000/svg" id="star<%= i %>" width="16" height="16" fill="#FFC100" class="<%= starClass %>" viewBox="0 0 16 16">
+                              <path d="<%= path %>"></path>
+                            </svg>
+                          <% } %>
+                        </p>
+                      </div>
+                    </div>
+                  <% } %>
+
+                    <% } else { %>
+                      <h3>Start adding games to this awesome library and keep track of what you played!!!</h3>
+                      <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/bdb7b7db-affd-48bf-b730-63ff2c882965/d60lnsh-cd849f5d-9e57-48be-a4ba-9d211e57e961.png/v1/fill/w_1024,h_640,q_80,strp/video_game_characters_wallpaper_by_v1d30guy_d60lnsh-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NjQwIiwicGF0aCI6IlwvZlwvYmRiN2I3ZGItYWZmZC00OGJmLWI3MzAtNjNmZjJjODgyOTY1XC9kNjBsbnNoLWNkODQ5ZjVkLTllNTctNDhiZS1hNGJhLTlkMjExZTU3ZTk2MS5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.aQnLkNkJkgCpSeJ0pf65p9TSnQW8tPjI-uMECA7qfAQ" width="300px" alt="">
+                  <% } %>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include("partials/footer.ejs") %>
+
+
+
+

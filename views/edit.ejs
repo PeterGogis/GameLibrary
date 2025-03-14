@@ -1,0 +1,44 @@
+<%- include("partials/header.ejs") %>
+
+<body>
+  <%- include("partials/navbar-add-edit.ejs") %>
+
+    <div id="test" class="container col-xxl-8 px-4 py-5" >
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="<%= game[0].image %>" name="gameImage" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+      </div>
+      <div class="col-lg-6">
+        
+        <h1 id="title" class="display-5 fw-bold text-body-emphasis lh-1 mb-3" name="gameTitle"><%= game[0].title %></h1>
+        <p id="desc" class="lead" name="gameDescription"><%= game[0].description %></p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          
+          <button id="editBtn" class="btn btn-dark btn-lg px-4 me-md-2" onclick="handler()">Edit</button>
+          <form action="/update" method="POST" class="col-lg-6">
+            <input hidden="true" name="id" value="<%= game[0].id %>">
+            <input type="text" class="display-5 fw-bold text-body-emphasis lh-1 mb-3" hidden="true" name="title" id="editTitle" value="<%= game[0].title %>">
+            <textarea hidden="true"  name="description" id="editDesc" rows="7" ><%= game[0].description %></textarea>
+            
+        </div>
+          <button id="saveBtn" type="submit" hidden="true" class="btn btn-dark btn-lg px-4 me-md-2">Save</button>
+          </form>
+
+          <a href="/delete/<%=game[0].id%>"><button type="button" class="btn btn-danger btn-lg px-4">Delete</button></a>
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function handler() {
+      document.getElementById("title").setAttribute("hidden", true)
+      document.getElementById("desc").setAttribute("hidden", true)
+      document.getElementById("editBtn").setAttribute("hidden",true)
+      document.getElementById("editTitle").removeAttribute("hidden")
+      document.getElementById("editDesc").removeAttribute("hidden")
+      document.getElementById("saveBtn").removeAttribute("hidden")
+    }
+  </script>
+<%- include("partials/footer.ejs") %>
